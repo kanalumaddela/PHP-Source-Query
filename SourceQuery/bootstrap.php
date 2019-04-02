@@ -14,9 +14,6 @@
  * @license GNU Lesser General Public License, version 2.1
  */
 
-// make sure global funcs are fully qualified/imported
-declare(no_dynamic_functions=1);
-
 /*
  * Replacement to previous "autoloader".
  *

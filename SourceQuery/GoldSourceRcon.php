@@ -13,12 +13,13 @@
 namespace xPaw\SourceQuery;
 
 use xPaw\SourceQuery\Exception\AuthenticationException;
+use xPaw\SourceQuery\Exception\InvalidPacketException;
 
-    /**
+/**
      * Class GoldSourceRcon.
      *
      *
-     * @uses xPaw\SourceQuery\Exception\AuthenticationException
+     * @uses \xPaw\SourceQuery\Exception\AuthenticationException
      */
     class GoldSourceRcon
     {
@@ -50,6 +51,12 @@ use xPaw\SourceQuery\Exception\AuthenticationException;
             //
         }
 
+        /**
+         * @param        $Header
+         * @param string $String
+         *
+         * @return bool
+         */
         public function Write($Header, $String = '')
         {
             $Command = pack('cccca*', 0xFF, 0xFF, 0xFF, 0xFF, $String);
@@ -61,9 +68,9 @@ use xPaw\SourceQuery\Exception\AuthenticationException;
         /**
          * @param int $Length
          *
-         * @throws AuthenticationException
-         *
-         * @return bool
+         * @return \xPaw\SourceQuery\Buffer
+         * @throws \xPaw\SourceQuery\Exception\AuthenticationException
+         * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
          */
         public function Read($Length = 1400)
         {
@@ -84,7 +91,7 @@ use xPaw\SourceQuery\Exception\AuthenticationException;
 
                     $Packet = $Buffer->Get();
                     $StringBuffer .= $Packet;
-                    //$StringBuffer .= SubStr( $Packet, 0, -2 );
+                    //$StringBuffer .= \substr( $Packet, 0, -2 );
 
                     // Let's assume if this packet is not long enough, there are no more after this one
                     $ReadMore = strlen($Packet) > 1000; // use 1300?
@@ -108,6 +115,13 @@ use xPaw\SourceQuery\Exception\AuthenticationException;
             return $Buffer;
         }
 
+        /**
+         * @param $Command
+         *
+         * @return string
+         * @throws \xPaw\SourceQuery\Exception\AuthenticationException
+         * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+         */
         public function Command($Command)
         {
             if (!$this->RconChallenge) {
@@ -120,6 +134,12 @@ use xPaw\SourceQuery\Exception\AuthenticationException;
             return $Buffer->Get();
         }
 
+        /**
+         * @param $Password
+         *
+         * @throws \xPaw\SourceQuery\Exception\AuthenticationException
+         * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+         */
         public function Authorize($Password)
         {
             $this->RconPassword = $Password;

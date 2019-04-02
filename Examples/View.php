@@ -34,7 +34,7 @@
     $Timer = number_format(microtime(true) - $Timer, 4, '.', '');
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>Source Query PHP Library</title>
@@ -132,7 +132,7 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th>Player <span class="label label-info"><?php echo count($Players); ?></span></th>
+							<th>Player <span class="label label-info"><?php echo \count($Players); ?></span></th>
 							<th class="frags-column">Frags</th>
 							<th class="frags-column">Time</th>
 						</tr>
@@ -160,7 +160,7 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th colspan="2">Rules <span class="label label-info"><?php echo count($Rules); ?></span></th>
+							<th colspan="2">Rules <span class="label label-info"><?php echo \count($Rules); ?></span></th>
 						</tr>
 					</thead>
 					<tbody>

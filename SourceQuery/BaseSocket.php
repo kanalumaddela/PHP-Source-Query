@@ -18,7 +18,7 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
      * Base socket interface.
      *
      *
-     * @uses xPaw\SourceQuery\Exception\InvalidPacketException
+     * @uses \xPaw\SourceQuery\Exception\InvalidPacketException
      */
     abstract class BaseSocket
     {
@@ -42,7 +42,15 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
 
         abstract public function Read($Length = 1400);
 
-        protected function ReadInternal($Buffer, $Length, $SherlockFunction)
+        /**
+         * @param \xPaw\SourceQuery\Buffer $Buffer
+         * @param                          $Length
+         * @param                          $SherlockFunction
+         *
+         * @return \xPaw\SourceQuery\Buffer
+         * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+         */
+        protected function ReadInternal(Buffer $Buffer, $Length, $SherlockFunction)
         {
             if ($Buffer->Remaining() === 0) {
                 throw new InvalidPacketException('Failed to read any data from socket', InvalidPacketException::BUFFER_EMPTY);
@@ -55,7 +63,7 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
             } elseif ($Header === -2) { // Split packet
                 $Packets = [];
                 $IsCompressed = false;
-                $ReadMore = false;
+                //$ReadMore = false;
 
                 do {
                     $RequestID = $Buffer->GetLong();
@@ -89,26 +97,26 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
 
                     $Packets[$PacketNumber] = $Buffer->Get();
 
-                    $ReadMore = $PacketCount > count($Packets);
+                    $ReadMore = $PacketCount > \count($Packets);
                 } while ($ReadMore && $SherlockFunction($Buffer, $Length));
 
-                $Data = implode($Packets);
+                $Data = \implode($Packets);
 
                 // TODO: Test this
                 if ($IsCompressed) {
                     // Let's make sure this function exists, it's not included in PHP by default
-                    if (!function_exists('bzdecompress')) {
+                    if (!\function_exists('bzdecompress')) {
                         throw new \RuntimeException('Received compressed packet, PHP doesn\'t have Bzip2 library installed, can\'t decompress.');
                     }
 
-                    $Data = bzdecompress($Data);
+                    $Data = \bzdecompress($Data);
 
-                    if (crc32($Data) !== $PacketChecksum) {
+                    if (\crc32($Data) !== $PacketChecksum) {
                         throw new InvalidPacketException('CRC32 checksum mismatch of uncompressed packet data.', InvalidPacketException::CHECKSUM_MISMATCH);
                     }
                 }
 
-                $Buffer->Set(substr($Data, 4));
+                $Buffer->Set(\substr($Data, 4));
             } else {
                 throw new InvalidPacketException('Socket read: Raw packet header mismatch. (0x'.dechex($Header).')', InvalidPacketException::PACKET_HEADER_MISMATCH);
             }

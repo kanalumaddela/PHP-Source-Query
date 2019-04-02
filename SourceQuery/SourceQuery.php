@@ -140,6 +140,7 @@ class SourceQuery
      * @param bool $Value Set to true to force old method
      *
      * @returns bool Previous value
+     *
      * @return bool
      */
     public function SetUseOldGetChallengeMethod($Value)

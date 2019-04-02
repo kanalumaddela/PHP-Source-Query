@@ -88,8 +88,9 @@ class SourceRcon
     }
 
     /**
-     * @return \xPaw\SourceQuery\Buffer
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return \xPaw\SourceQuery\Buffer
      */
     public function Read()
     {
@@ -130,9 +131,10 @@ class SourceRcon
     /**
      * @param $Command
      *
-     * @return string
      * @throws \xPaw\SourceQuery\Exception\AuthenticationException
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return string
      */
     public function Command($Command)
     {
@@ -145,7 +147,7 @@ class SourceRcon
 
         if ($Type === SourceQuery::SERVERDATA_AUTH_RESPONSE) {
             throw new AuthenticationException('Bad rcon_password.', AuthenticationException::BAD_PASSWORD);
-        } else if ($Type !== SourceQuery::SERVERDATA_RESPONSE_VALUE) {
+        } elseif ($Type !== SourceQuery::SERVERDATA_RESPONSE_VALUE) {
             throw new InvalidPacketException('Invalid rcon response.', InvalidPacketException::PACKET_HEADER_MISMATCH);
         }
 

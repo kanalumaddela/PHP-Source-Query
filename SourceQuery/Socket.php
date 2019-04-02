@@ -75,8 +75,9 @@ class Socket extends BaseSocket
      *
      * @param int $Length
      *
-     * @return Buffer Buffer
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return Buffer Buffer
      */
     public function Read($Length = 1400)
     {
@@ -92,8 +93,9 @@ class Socket extends BaseSocket
      * @param \xPaw\SourceQuery\Buffer $Buffer
      * @param int                      $Length
      *
-     * @return bool
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return bool
      */
     public function Sherlock(Buffer $Buffer, $Length)
     {

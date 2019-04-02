@@ -22,9 +22,7 @@
 \spl_autoload_register(function ($class) {
     $namespace = 'xPaw\\SourceQuery\\';
 
-    $length = \strlen($namespace);
-
-    if (\strncmp($namespace, $class, $length) !== 0) {
+    if (\strncmp($namespace, $class, $length = \strlen($namespace)) !== 0) {
         return;
     }
 

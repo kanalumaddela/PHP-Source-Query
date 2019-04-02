@@ -17,12 +17,12 @@
 // make sure global funcs are fully qualified/imported
 declare(no_dynamic_functions=1);
 
-/**
+/*
  * Replacement to previous "autoloader".
  *
  * @author kanalumaddela <git@maddela.org>
  */
-\spl_autoload_register(function($class) {
+\spl_autoload_register(function ($class) {
     $namespace = 'xPaw\\SourceQuery\\';
 
     $length = \strlen($namespace);

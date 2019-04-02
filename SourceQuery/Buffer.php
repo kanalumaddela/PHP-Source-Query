@@ -82,7 +82,7 @@ class Buffer
 
         if ($Length === -1) {
             $Length = $Remaining;
-        } else if ($Length > $Remaining) {
+        } elseif ($Length > $Remaining) {
             return '';
         }
 
@@ -106,8 +106,9 @@ class Buffer
     /**
      * Get short from buffer.
      *
-     * @return int
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return int
      */
     public function GetShort()
     {
@@ -123,8 +124,9 @@ class Buffer
     /**
      * Get long from buffer.
      *
-     * @return int
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return int
      */
     public function GetLong()
     {
@@ -140,8 +142,9 @@ class Buffer
     /**
      * Get float from buffer.
      *
-     * @return float
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return float
      */
     public function GetFloat()
     {
@@ -157,8 +160,9 @@ class Buffer
     /**
      * Get unsigned long from buffer.
      *
-     * @return int
      * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+     *
+     * @return int
      */
     public function GetUnsignedLong()
     {

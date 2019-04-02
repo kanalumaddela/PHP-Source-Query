@@ -1,14 +1,14 @@
 <?php
-    /**
-     * @author Pavel Djundik <sourcequery@xpaw.me>
-     *
-     * @link https://xpaw.me
-     * @link https://github.com/xPaw/PHP-Source-Query
-     *
-     * @license GNU Lesser General Public License, version 2.1
-     *
-     * @internal
-     */
+/**
+ * @author Pavel Djundik <sourcequery@xpaw.me>
+ *
+ * @link https://xpaw.me
+ * @link https://github.com/xPaw/PHP-Source-Query
+ *
+ * @license GNU Lesser General Public License, version 2.1
+ *
+ * @internal
+ */
 
 namespace xPaw\SourceQuery;
 
@@ -68,9 +68,10 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
         /**
          * @param int $Length
          *
-         * @return \xPaw\SourceQuery\Buffer
          * @throws \xPaw\SourceQuery\Exception\AuthenticationException
          * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+         *
+         * @return \xPaw\SourceQuery\Buffer
          */
         public function Read($Length = 1400)
         {
@@ -118,9 +119,10 @@ use xPaw\SourceQuery\Exception\InvalidPacketException;
         /**
          * @param $Command
          *
-         * @return string
          * @throws \xPaw\SourceQuery\Exception\AuthenticationException
          * @throws \xPaw\SourceQuery\Exception\InvalidPacketException
+         *
+         * @return string
          */
         public function Command($Command)
         {
